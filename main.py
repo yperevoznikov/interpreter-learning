@@ -69,13 +69,6 @@ class MathTokensConveyor:
         waiting_math_operator = None
 
         for token in tokens:
-            # # process first token
-            # if result is None:
-            #     if token.kind != Token.INTEGER:
-            #         raise Exception("Number must be first")
-            #     result = int(token.value)
-            #     continue
-
             # Handle operations
             if token.kind == Token.MATH_OPERATOR:
                 waiting_math_operator = token
@@ -99,14 +92,19 @@ class MathTokensConveyor:
             return right_operand
 
         result_value = None
+        right_operand_value = float(right_operand.value)
         if operation.value == "+":
-            result_value = float(left_operand.value) + float(right_operand.value)
+            left_operand_value = float(left_operand.value) if left_operand is not None else 0
+            result_value = left_operand_value + right_operand_value
         elif operation.value == "-":
-            result_value = float(left_operand.value) - float(right_operand.value)
+            left_operand_value = float(left_operand.value) if left_operand is not None else 0
+            result_value = left_operand_value - right_operand_value
         elif operation.value == "/":
-            result_value = float(left_operand.value) / float(right_operand.value)
+            left_operand_value = float(left_operand.value)
+            result_value = left_operand_value / right_operand_value
         elif operation.value == "*":
-            result_value = float(left_operand.value) * float(right_operand.value)
+            left_operand_value = float(left_operand.value)
+            result_value = left_operand_value * right_operand_value
 
         if result_value is None:
             raise Exception(f"Not supported operation '{operation}'")

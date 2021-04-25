@@ -4,6 +4,7 @@ from main import Token, MathTokensConveyor
 def test_complex_example():
     conveyor = MathTokensConveyor()
     result_token = conveyor.process([
+        Token(Token.MATH_OPERATOR, "-"),
         Token(Token.INTEGER, "5"),
         Token(Token.MATH_OPERATOR, "+"),
         Token(Token.INTEGER, "4"),
@@ -14,5 +15,5 @@ def test_complex_example():
         Token(Token.MATH_OPERATOR, "*"),
         Token(Token.INTEGER, "4"),
     ])
-    assert result_token.value == "16.0"
+    assert result_token.value == "-4.0"
 
